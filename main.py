@@ -41,33 +41,49 @@ class Point:
 
 
 class ComplexNumber:
-    def __init__(self) -> None:
-        """Создает 2 аттрибута real: int, img: int"""
+    def __init__(self, real: int, img: int) -> None:
+        """Создает 2 аттрибута: real и img"""
+        self.real = real
+        self.img = img
 
     def __add__(self, cx: ComplexNumber) -> ComplexNumber:
         """Реальная часть складывается с реальной, воображаемая с воображаемой"""
-        return
+        new_real = self.real + cx.real
+        new_img = self.img + cx.img
+        return ComplexNumber(new_real, new_img)
 
     def __sub__(self, cx: ComplexNumber) -> ComplexNumber:
         """Реальная часть отнимается с реальной, воображаемая с воображаемой"""
-        return
+        new_real = self.real - cx.real
+        new_img = self.img - cx.img
+        return ComplexNumber(new_real, new_img)
 
     def __repr__(self) -> str:
         """Возвращает в формате: 5 + 7j"""
-        return
+        sign = "+" if self.img >= 0 else "-"
+        return f"{self.real} {sign} {abs(self.img)}j"
 
     def __iadd__(self, cx: ComplexNumber) -> ComplexNumber:
-        return
+        """Добавляет значение cx к текущему объекту"""
+        self.real += cx.real
+        self.img += cx.img
+        return self
 
     def __isub__(self, cx: ComplexNumber) -> ComplexNumber:
-        return
+        """Вычитает значение cx из текущего объекта"""
+        self.real -= cx.real
+        self.img -= cx.img
+        return self
 
     def __eq__(self, cx: ComplexNumber) -> bool:
-        return
+        """Проверяет равенство комплексных чисел"""
+        return self.real == cx.real and self.img == cx.img
 
 
-# __add__ +
-# __sub__ -
-# __iadd__ +=
-# __isub__ -=
-# __eq__ ==
+# cx1 = ComplexNumber(5, 7)
+# cx2 = ComplexNumber(3, 2)
+# cx3 = cx1 + cx2
+# print(cx3)  # Выведет "8 + 9j"
+# cx1 += cx2
+# print(cx1)  # Выведет "8 + 9j"
+# print(cx1 == cx3)  # Выведет "True"
